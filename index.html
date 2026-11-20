@@ -1,0 +1,635 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#789B78">
+  <title>FamCart - Shop Smart Together</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/script.js" defer></script>
+</head>
+<body>
+
+<!-- LOGIN -->
+<section id="authScreen" class="auth-screen">
+  <div class="auth-decoration">🛒</div>
+  <form id="authForm" class="auth-card">
+    <div class="brand-logo">🛒 <span>FamCart</span></div>
+    <p class="eyebrow">SHOP SMART TOGETHER</p>
+    <h1 id="authTitle">Welcome Back!</h1>
+    <p id="authDescription">Login to manage your family shopping.</p>
+
+    <div id="registerNameField" class="form-group hidden">
+      <label>Full Name</label>
+      <input id="registerName" type="text" placeholder="Enter your name">
+    </div>
+
+    <div class="form-group">
+      <label>Email Address</label>
+      <input id="authEmail" type="email" placeholder="Enter your email" required>
+    </div>
+
+    <div class="form-group">
+      <label>Password</label>
+      <input id="authPassword" type="password" placeholder="Enter password" required>
+    </div>
+
+    <button id="authSubmit" class="btn btn-primary full-btn">Login</button>
+    <p class="auth-switch">
+      <span id="authSwitchText">Don't have an account?</span>
+      <button type="button" id="authSwitch">Register</button>
+    </p>
+    <p class="demo-note">Demo: family@famcart.com / 123456</p>
+  </form>
+</section>
+
+<!-- MAIN APPLICATION -->
+<div id="app" class="app-layout hidden">
+
+  <!-- SIDEBAR -->
+  <aside id="sidebar" class="sidebar">
+    <div class="brand">
+      <div class="brand-icon">🛒</div>
+      <div>
+        <h2>FamCart</h2>
+        <span>Shop Smart Together</span>
+      </div>
+    </div>
+
+    <div class="family-label">
+      <span class="online-dot"></span>
+      <span id="sidebarFamily">Mesa Family</span>
+    </div>
+
+    <p class="nav-label">MENU</p>
+
+    <nav class="navigation">
+      <button class="nav-item active" data-page="home">
+        <span>⌂</span> Dashboard
+      </button>
+      <button class="nav-item" data-page="lists">
+        <span>☷</span> My Lists
+      </button>
+      <button class="nav-item" data-page="categories">
+        <span>▦</span> Categories
+      </button>
+      <button class="nav-item" data-page="family">
+        <span>♧</span> Family
+      </button>
+      <button class="nav-item" data-page="history">
+        <span>◷</span> History
+      </button>
+      <button class="nav-item" data-page="settings">
+        <span>⚙</span> Settings
+      </button>
+    </nav>
+
+    <div class="sidebar-bottom">
+      <div class="sidebar-tip">
+        <strong>Shop smarter!</strong>
+      </div>
+      <button id="logoutBtn" class="logout-button">↪ Log Out</button>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <main class="main-content">
+
+    <header class="topbar">
+      <div class="topbar-left">
+        <button id="menuToggle" class="menu-toggle">☰</button>
+        <div>
+          <p class="eyebrow">FAMCART / <span id="pageTitle">Dashboard</span></p>
+          <h2 id="pageSubtitle">Your family shopping overview</h2>
+        </div>
+      </div>
+
+      <div class="topbar-right">
+        <div class="live-clock">
+          <span>◷</span>
+          <div>
+            <strong id="liveTime">--:--:--</strong>
+            <small id="liveDate">Loading date...</small>
+          </div>
+        </div>
+        <button id="profileQuickBtn" class="profile-button">
+          <span id="topAvatar" class="avatar">M</span>
+          <span id="topName">Mark Mesa</span>
+          <span>⌄</span>
+        </button>
+      </div>
+    </header>
+
+    <div class="page-container">
+
+      <!-- DASHBOARD -->
+      <section id="page-home" class="page active">
+
+        <div class="welcome-banner">
+          <div>
+            <p class="eyebrow">YOUR FAMILY SHOPPING SPACE</p>
+            <h1>Welcome to FamCart! 👋</h1>
+            <p>Everything your family needs, organized in one place.</p>
+            <button class="btn btn-light" data-action="add-product">
+              + Add New Product
+            </button>
+          </div>
+          <div class="welcome-art">🧺🥬🍎</div>
+        </div>
+
+        <div class="section-heading">
+          <div>
+            <h2>Shopping Overview</h2>
+            <p>Here's what's happening with your shopping.</p>
+          </div>
+          <span id="currentDate" class="date-pill">Today</span>
+        </div>
+
+        <div class="stats-grid">
+          <article class="stat-card">
+            <div class="stat-top">
+              <span>Total Items</span>
+              <span class="stat-icon sage">🛍️</span>
+            </div>
+            <h2 id="totalItems">0</h2>
+            <p>Products in all lists</p>
+          </article>
+
+          <article class="stat-card">
+            <div class="stat-top">
+              <span>Completed</span>
+              <span class="stat-icon green">✓</span>
+            </div>
+            <h2 id="completedItems">0</h2>
+            <p>Already purchased</p>
+          </article>
+
+          <article class="stat-card">
+            <div class="stat-top">
+              <span>Remaining</span>
+              <span class="stat-icon orange">◷</span>
+            </div>
+            <h2 id="remainingItems">0</h2>
+            <p>Still on your list</p>
+          </article>
+
+          <article class="stat-card">
+            <div class="stat-top">
+              <span>Shopping Lists</span>
+              <span class="stat-icon purple">☷</span>
+            </div>
+            <h2 id="totalLists">0</h2>
+            <p>Active shopping lists</p>
+          </article>
+        </div>
+
+        <!-- TOTAL MONEY -->
+        <div class="financial-grid">
+          <article class="money-card">
+            <div class="money-icon">💰</div>
+            <div>
+              <p>Total Estimated Cost</p>
+              <h2 id="totalEstimated">₱0.00</h2>
+              <small>All products in your shopping lists</small>
+            </div>
+          </article>
+
+          <article class="money-card purchased-money">
+            <div class="money-icon">🧾</div>
+            <div>
+              <p>Purchased Total</p>
+              <h2 id="totalPurchased">₱0.00</h2>
+              <small>Value of completed products</small>
+            </div>
+          </article>
+
+          <article class="money-card remaining-money">
+            <div class="money-icon">🪙</div>
+            <div>
+              <p>Remaining Budget Estimate</p>
+              <h2 id="totalRemainingCost">₱0.00</h2>
+              <small>Value of products not yet purchased</small>
+            </div>
+          </article>
+        </div>
+
+        <div class="dashboard-grid">
+          <article class="content-card overview-card">
+            <div class="section-heading">
+              <div>
+                <h3>Quick Overview</h3>
+                <p>Your shopping progress</p>
+              </div>
+              <span class="circle-icon">📊</span>
+            </div>
+
+            <div class="progress-summary">
+              <div class="progress-number">
+                <h2 id="completionPercent">0%</h2>
+                <span>Completed</span>
+              </div>
+              <div class="progress-track large">
+                <div id="completionBar" class="progress-fill"></div>
+              </div>
+              <div class="overview-details">
+                <span>✓ Purchased <strong id="overviewPurchased">0</strong></span>
+                <span>◷ Remaining <strong id="overviewPending">0</strong></span>
+              </div>
+            </div>
+          </article>
+
+          <article class="content-card">
+            <div class="section-heading">
+              <div>
+                <h3>Popular Categories</h3>
+                <p>Browse your products</p>
+              </div>
+              <button class="text-button" data-page="categories">View all →</button>
+            </div>
+            <div id="popularCategories" class="popular-grid"></div>
+          </article>
+        </div>
+
+        <article class="content-card recent-card">
+          <div class="section-heading">
+            <div>
+              <h3>Recent Shopping Activity</h3>
+              <p>Your latest purchased products</p>
+            </div>
+            <button class="text-button" data-page="history">View history →</button>
+          </div>
+          <div id="recentActivity"></div>
+        </article>
+      </section>
+
+      <!-- MY LISTS -->
+      <section id="page-lists" class="page">
+        <div class="section-heading">
+          <div>
+            <h1>My Shopping Lists 🛒</h1>
+            <p>Organize your family's shopping needs.</p>
+          </div>
+          <button class="btn btn-primary" data-action="add-list">+ New List</button>
+        </div>
+
+        <div id="shoppingLists" class="lists-grid"></div>
+
+        <article class="content-card products-section">
+          <div class="section-heading">
+            <div>
+              <h2 id="selectedListTitle">Shopping Items</h2>
+              <p>Manage products in your selected list.</p>
+            </div>
+            <button class="btn btn-primary" data-action="add-product">+ Add Product</button>
+          </div>
+
+          <div class="filter-bar">
+            <input id="listSearch" type="search" placeholder="⌕ Search products...">
+            <select id="listStatus">
+              <option value="all">All Products</option>
+              <option value="pending">Not Purchased</option>
+              <option value="purchased">Purchased</option>
+            </select>
+          </div>
+          <div id="listProducts" class="product-list"></div>
+        </article>
+      </section>
+
+      <!-- CATEGORIES -->
+      <section id="page-categories" class="page">
+        <div class="section-heading">
+          <div>
+            <h1>Shopping Categories 🥬</h1>
+            <p>Find your products easily by category.</p>
+          </div>
+          <button class="btn btn-primary" data-action="add-product">+ Add Product</button>
+        </div>
+
+        <div id="categoryGrid" class="category-grid"></div>
+
+        <article class="content-card products-section">
+          <div class="section-heading">
+            <div>
+              <h2 id="categoryProductTitle">All Products</h2>
+              <p>Products belonging to the selected category.</p>
+            </div>
+          </div>
+          <div id="categoryProducts" class="product-list"></div>
+        </article>
+      </section>
+
+      <!-- FAMILY -->
+      <section id="page-family" class="page">
+        <div class="section-heading">
+          <div>
+            <h1>Our Family 👨‍👩‍👧</h1>
+            <p>Manage your family shopping members.</p>
+          </div>
+          <button class="btn btn-primary" data-action="add-member">+ Add Member</button>
+        </div>
+
+        <article class="family-banner">
+          <div class="family-icon">🏡</div>
+          <div>
+            <p>YOUR FAMILY GROUP</p>
+            <h2 id="familyPageName">Mesa Family</h2>
+            <span id="familyMemberCount">0 family members</span>
+          </div>
+          <button class="btn btn-light" data-action="edit-family">Edit Family Name</button>
+        </article>
+
+        <div class="section-heading simple-heading">
+          <h2>Family Members</h2>
+        </div>
+        <div id="familyGrid" class="family-grid"></div>
+
+        <p class="info-note">ℹ️ Family management is stored locally on this device. It does not provide online multi-user synchronization.</p>
+      </section>
+
+      <!-- HISTORY -->
+      <section id="page-history" class="page">
+        <div class="section-heading">
+          <div>
+            <h1>Shopping History ◷</h1>
+            <p>Keep track of your completed purchases.</p>
+          </div>
+          <button class="btn btn-danger-outline" data-action="clear-history">Clear History</button>
+        </div>
+
+        <div class="history-stats">
+          <article class="stat-card">
+            <p>Total Purchased Records</p>
+            <h2 id="historyCount">0</h2>
+          </article>
+          <article class="stat-card">
+            <p>Total Recorded Spending</p>
+            <h2 id="historySpending">₱0.00</h2>
+          </article>
+        </div>
+
+        <article class="content-card">
+          <div class="section-heading">
+            <div>
+              <h3>Purchase Records</h3>
+              <p>Your shopping transactions</p>
+            </div>
+            <select id="historyCategory">
+              <option value="all">All Categories</option>
+            </select>
+          </div>
+          <div id="historyList" class="product-list"></div>
+        </article>
+      </section>
+
+      <!-- SETTINGS -->
+      <section id="page-settings" class="page">
+        <div class="section-heading">
+          <div>
+            <h1>Settings ⚙</h1>
+            <p>Personalize your FamCart experience.</p>
+          </div>
+        </div>
+
+        <article class="content-card settings-card">
+          <div class="settings-heading">
+            <span>👤</span>
+            <div>
+              <h3>Profile Information</h3>
+              <p>Update your account information.</p>
+            </div>
+          </div>
+
+          <form id="profileSettingsForm" class="settings-form">
+            <div class="form-group">
+              <label>Profile Name</label>
+              <input id="settingsProfileName" required>
+            </div>
+            <div class="form-group">
+              <label>Email Address</label>
+              <input id="settingsProfileEmail" type="email" required>
+            </div>
+            <button class="btn btn-primary" type="submit">Update Profile</button>
+          </form>
+          <p class="settings-hint">To change your password, use the profile button in the top bar.</p>
+        </article>
+
+        <article class="content-card settings-card">
+          <div class="settings-heading">
+            <span>🏡</span>
+            <div>
+              <h3>Family Settings</h3>
+              <p>Change your family name.</p>
+            </div>
+          </div>
+
+          <form id="familySettingsForm" class="settings-form">
+            <div class="form-group">
+              <label>Family Name</label>
+              <input id="settingsFamilyName" required>
+            </div>
+            <button class="btn btn-primary" type="submit">Save Family Name</button>
+          </form>
+        </article>
+
+        <article class="content-card settings-card">
+          <div class="settings-heading">
+            <span>💵</span>
+            <div>
+              <h3>Currency Preference</h3>
+              <p>Select the currency used for product prices.</p>
+            </div>
+          </div>
+          <div class="settings-form">
+            <div class="form-group">
+              <label>Currency</label>
+              <select id="currencySelect">
+                <option value="PHP">PHP - Philippine Peso (₱)</option>
+                <option value="USD">USD - US Dollar ($)</option>
+                <option value="EUR">EUR - Euro (€)</option>
+                <option value="JPY">JPY - Japanese Yen (¥)</option>
+              </select>
+            </div>
+            <button id="saveCurrency" class="btn btn-primary">Save Currency</button>
+          </div>
+        </article>
+
+        <article class="content-card settings-card danger-zone">
+          <div class="settings-heading">
+            <span>⚠️</span>
+            <div>
+              <h3>Data Management</h3>
+              <p>Manage your saved shopping information.</p>
+            </div>
+          </div>
+          <div class="settings-actions">
+            <button class="btn btn-danger-outline" data-action="clear-data">Clear Shopping Data</button>
+            <button class="btn btn-outline" data-action="reset-data">Reset Sample Data</button>
+          </div>
+        </article>
+      </section>
+
+    </div>
+    <footer class="footer">Made with 💚 for smarter family shopping · FamCart</footer>
+  </main>
+</div>
+
+<!-- PRODUCT MODAL -->
+<div id="productModal" class="modal-overlay">
+  <div class="modal-box">
+    <div class="modal-header">
+      <div>
+        <p class="eyebrow">SHOPPING MANAGEMENT</p>
+        <h2 id="productModalTitle">Add New Product</h2>
+      </div>
+      <button class="modal-close" data-close="productModal">×</button>
+    </div>
+    <form id="productForm">
+      <input type="hidden" id="productId">
+      <div class="form-group">
+        <label>Product Name *</label>
+        <input id="productName" placeholder="e.g. Fresh Apples" required maxlength="100">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Category *</label>
+          <select id="productCategory" required></select>
+        </div>
+        <div class="form-group">
+          <label>Shopping List *</label>
+          <select id="productList" required></select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Quantity *</label>
+          <input id="productQuantity" type="number" min="0.01" step="any" value="1" required>
+        </div>
+        <div class="form-group">
+          <label>Unit</label>
+          <select id="productUnit">
+            <option>pcs</option><option>kg</option><option>g</option>
+            <option>L</option><option>ml</option><option>pack</option><option>bottle</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Estimated Price (per unit) *</label>
+        <input id="productPrice" type="number" min="0" step="0.01" placeholder="0.00" required>
+      </div>
+      <div class="form-group">
+        <label>Notes (Optional)</label>
+        <textarea id="productNotes" placeholder="Additional product details..." rows="3"></textarea>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-outline" data-close="productModal">Cancel</button>
+        <button type="submit" class="btn btn-primary">Save Product</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- LIST MODAL -->
+<div id="listModal" class="modal-overlay">
+  <div class="modal-box small-modal">
+    <div class="modal-header">
+      <h2 id="listModalTitle">Create Shopping List</h2>
+      <button class="modal-close" data-close="listModal">×</button>
+    </div>
+    <form id="listForm">
+      <input type="hidden" id="listId">
+      <div class="form-group">
+        <label>Shopping List Name</label>
+        <input id="listName" placeholder="e.g. Weekend Groceries" required>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-outline" data-close="listModal">Cancel</button>
+        <button class="btn btn-primary">Save List</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- FAMILY MEMBER MODAL -->
+<div id="memberModal" class="modal-overlay">
+  <div class="modal-box small-modal">
+    <div class="modal-header">
+      <h2 id="memberModalTitle">Add Family Member</h2>
+      <button class="modal-close" data-close="memberModal">×</button>
+    </div>
+    <form id="memberForm">
+      <input type="hidden" id="memberId">
+      <div class="form-group">
+        <label>Member Name</label>
+        <input id="memberName" placeholder="Enter member name" required>
+      </div>
+      <div class="form-group">
+        <label>Role</label>
+        <select id="memberRole">
+          <option>Member</option>
+          <option>Admin</option>
+        </select>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-outline" data-close="memberModal">Cancel</button>
+        <button class="btn btn-primary">Save Member</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- FAMILY NAME MODAL -->
+<div id="familyModal" class="modal-overlay">
+  <div class="modal-box small-modal">
+    <div class="modal-header">
+      <h2>Edit Family Name</h2>
+      <button class="modal-close" data-close="familyModal">×</button>
+    </div>
+    <form id="familyForm">
+      <div class="form-group">
+        <label>Family Name</label>
+        <input id="familyNameInput" required>
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-outline" data-close="familyModal">Cancel</button>
+        <button class="btn btn-primary">Save Changes</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- PROFILE MODAL -->
+<div id="profileModal" class="modal-overlay">
+  <div class="modal-box small-modal">
+    <div class="modal-header">
+      <h2>Edit Profile</h2>
+      <button class="modal-close" data-close="profileModal">×</button>
+    </div>
+    <form id="profileForm">
+      <div class="form-group">
+        <label>Full Name</label>
+        <input id="profileName" required>
+      </div>
+      <div class="form-group">
+        <label>Email Address</label>
+        <input id="profileEmail" type="email" required>
+      </div>
+      <div class="form-group">
+        <label>New Password (Optional)</label>
+        <input id="profilePassword" type="password" minlength="6" placeholder="Leave blank to keep current password">
+      </div>
+      <div class="modal-actions">
+        <button type="button" class="btn btn-outline" data-close="profileModal">Cancel</button>
+        <button class="btn btn-primary">Save Profile</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+</body>
+</html>
