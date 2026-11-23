@@ -47,7 +47,7 @@ FamCart is a family shopping list organizer that helps users manage their grocer
 
 **Year Level:** 2nd Year
 
-**Section:** [PUT YOUR SECTION HERE]
+**Section:** BSINTE 2A
 
 ---
 
